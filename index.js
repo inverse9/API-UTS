@@ -1,5 +1,7 @@
 const express = require("express");
-const route = require("./routes");
+const menuRoute = require("./routes/menu");
+const userRoute = require("./routes/user");
+const orderRoute = require("./routes/order");
 
 const app = express();
 
@@ -10,6 +12,8 @@ app.use(
   })
 );
 
-app.get("/", (_, res) => res.send("Hello World"));
-app.use("/menu", route);
-app.listen(3000, () => console.log("listenig on localhost:3000"));
+app.get("/", (_, res) => res.send("Hello"));
+app.use("/menu", menuRoute);
+app.use("/users", userRoute);
+app.use("/orders", orderRoute);
+app.listen(3000, () => console.log("listening on http://localhost:3000"));
