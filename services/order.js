@@ -3,10 +3,15 @@ const TABLE_NAME = "order";
 
 async function get(id) {
   if (id) {
-    const { data } = await supabase.from(TABLE_NAME).select().eq("id", id);
+    const { data } = await supabase
+      .from(TABLE_NAME)
+      .select(`user_id,user (id,name),menu_id, menu (id,name,price), qty,total`)
+      .eq("id", id);
     return data;
   }
-  const { data } = await supabase.from(TABLE_NAME).select();
+  const { data } = await supabase
+    .from(TABLE_NAME)
+    .select(`user_id,user (id,name),menu_id, menu (id,name,price), qty,total`);
   return data;
 }
 async function post(req) {
